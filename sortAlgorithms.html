@@ -9,27 +9,44 @@
   <body>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
     
+
+<!-- ENTRADA DE DADOS -->
     <button type="button" onclick="printArrayRandom()">Random Generation</button>
+    <textarea rows="4" cols="50" id="textAreaRandom">
+        Press the button to generate random numbers
+    </textarea>
+    <input id="arrayInputSize" type="number" name="quantity" min="1" max="5">
+
 
 <script type="text/javascript">
 
     function printArrayRandom(){
-        alert(arrayRandom(10));
+        var size = $('#arrayInputSize').val();
+        var arrayRand = generateRandomArray(size);
+        $('#textAreaRandom').val(arrayRand);
+        $('#textAreaRandomCount').html(arrayRand.length);
     }
     
     ////////////////////////////////////////////
     // Retorna array de tamanho 'size' com numeros randomicos
-    function arrayRandom(size){
+    function generateRandomArray(size){
         var array = [];
         for (i = 0; i < size ; i++){
-            array.push(numberRandom());
+            array.push(generateRandomNumber());
         } 
         return array;      
     }
     
     ////////////////////////////////////////////
     // Gera e retorna um númerom inteiro entre [1, 2000]
-    function numberRandom(){
+    function generateRandomNumber(){
+
+        return Math.floor((Math.random() * 2000) + 1); 
+    }
+
+    ////////////////////////////////////////////
+    // Gera e retorna um númerom inteiro entre [1, 2000]
+    function sortInput(sortAlgorithm, ){
 
         return Math.floor((Math.random() * 2000) + 1); 
     }
