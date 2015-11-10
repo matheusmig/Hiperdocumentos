@@ -9,16 +9,20 @@
   <body>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
     
-
+    <button type="button" onclick="printArrayRandom()">Random Generation</button>
 
 <script type="text/javascript">
 
+    function printArrayRandom(){
+        alert(arrayRandom(10));
+    }
+    
     ////////////////////////////////////////////
     // Retorna array de tamanho 'size' com numeros randomicos
     function arrayRandom(size){
         var array = [];
         for (i = 0; i < size ; i++){
-            array.add(numberRandom());
+            array.push(numberRandom());
         } 
         return array;      
     }
