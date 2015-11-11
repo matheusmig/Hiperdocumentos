@@ -1,0 +1,38 @@
+.texto {
+    color: #ffffff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+
+div {
+    background: #300;
+    color: #FFF;
+    padding: 10px;
+    margin: 10px;
+}
+
+#centro1 {
+	width:300px;
+	height:60px;
+	position:absolute;
+	/*top:50%;*/
+	left:50%;
+	/*margin-top:-50px;*/
+	margin-left:-150px;
+	text-align: center;
+}
+
+#centro2 {
+	width:500px;
+	height:100px;
+	position:absolute;
+	/*top:50%;*/
+	left:50%;
+	/*margin-top:-50px;*/
+	margin-left:-250px;
+	text-align: center;
+}
