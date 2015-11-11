@@ -8,6 +8,7 @@
   </head>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
 
+<<<<<<< HEAD
 <body id="centro2">
   <div class="texto"  id="centro" >
     <p>
@@ -20,6 +21,11 @@
 <div>
   
     
+=======
+  <body>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->
+>>>>>>> origin/master
 
 
 <!-- ENTRADA DE DADOS -->    
@@ -39,6 +45,8 @@
     <button type="button" onclick="buttonSort()">Sort!</button>
     <br><br>
 
+    <button type="button" onclick="printChart()">Print Chart</button>
+    <br><br>
 
     <textarea rows="4" cols="50" id="textAreaRandom">
         Press the button to generate random numbers
@@ -46,11 +54,18 @@
     <textarea rows="4" cols="50" id="textAreaSorted">
         Sorted List
     </textarea>
+<<<<<<< HEAD
 
 </div>
+=======
+    <br>
+    <canvas id="myChart" width="300" height="400"></canvas>
+
+>>>>>>> origin/master
 
 <script type="text/javascript">
 
+    /* Botões */
     function buttonRandomGeneration(){
         var size = $('#arrayInputSize').val();
         if (size > 0){
@@ -76,6 +91,49 @@
 
             $('#textAreaSorted').val(sortedArray); 
         }
+    }
+
+    function printChart(){
+        // Get context with jQuery - using jQuery's .get() method.
+        var ctx = $("#myChart").get(0).getContext("2d");
+
+
+        //Lê dados ordenados em formato de string e faz parse para array
+        var strArray = $('#textAreaSorted').val();
+        var array = strArray.split(",").map(Number);
+
+        var data = encodeToJSON(array);
+        var options = setChartOptions();
+
+        // This will get the first returned node in the jQuery collection.
+        // var myNewChart = new Chart(ctx);
+        var myBarChart = new Chart(ctx).Bar(data, '');
+    }
+
+    // Processa um array de dados e transforma em um objeto JSON
+    function encodeToJSON(array){
+        var strLabels =  '"labels" : [';
+        var strData =  '"data" : [';
+
+        // Percorre todo array de dados
+        for (i = 1; i < array.length; i++) {
+            if ( i == 1){
+                strLabels = strLabels +'"'+array[i]+'"';
+                strData = strData +'"'+array[i]+'"';
+            } else {
+                strLabels = strLabels +', "'+array[i]+'"';
+                strData = strData +', "'+array[i]+'"';
+            }
+
+        }
+        
+        strLabels = strLabels + ']';
+        strData = strData + ']';
+
+        var strDataSets = '"datasets" : [' + ' { '+ strData + ' } ' + ' ]';
+        var strResult = '{ ' + strLabels +','+ strDataSets +'}';
+        var jsonObj = JSON.parse(strResult);
+        return(jsonObj);
     }
     
     ////////////////////////////////////////////
@@ -149,6 +207,27 @@
             array[j] = chosed;
         }
         return array;
+    }
+
+
+    function setChartOptions(){
+       var options = '{';
+       options =  options + ' "responsive"               : "true",';   
+       options =  options + ' "maintainAspectRatio"      : "false",';    
+       options =  options + ' "showTooltips"             : "false",';
+       options =  options + ' "scaleBeginAtZero"         : "true",';
+       options =  options + ' "scaleShowGridLines"       : "true",';
+       options =  options + ' "scaleGridLineColor"       : "rgba(0,0,0,.05)",';
+       options =  options + ' "scaleGridLineWidth"       : 1,';
+       options =  options + ' "scaleShowHorizontalLines" : true,';
+       options =  options + ' "scaleShowVerticalLines"   : true,';
+       options =  options + ' "barShowStroke"            : true,';
+       options =  options + ' "barStrokeWidth"           : 2,';
+       options =  options + ' "barValueSpacing"          : 5,';
+       options =  options + ' "barDatasetSpacing"        : 1 }';
+
+        var jsonObj = JSON.parse(options);
+        return(jsonObj);
     }
   
 </script>
