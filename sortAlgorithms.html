@@ -10,21 +10,60 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
     
 
-<!-- ENTRADA DE DADOS -->
-    <button type="button" onclick="printArrayRandom()">Random Generation</button>
+<!-- ENTRADA DE DADOS -->    
+    <label for="quantity">Size</label>
+    <input id="arrayInputSize" type="number" name="quantity" min="1" max="500" value="10">
+    <br><br>
+
+    <button type="button" onclick="buttonRandomGeneration()">Random Generation</button>
+    <br><br>
+
+    <input type="radio" name="algorithm" value="quickSort" checked>QuickSort
+    <br>
+    <input type="radio" name="algorithm" value="insertionSort">InsertionSort
+    <br>
+
+
+    <button type="button" onclick="buttonSort()">Sort!</button>
+    <br><br>
+
+
     <textarea rows="4" cols="50" id="textAreaRandom">
         Press the button to generate random numbers
     </textarea>
-    <input id="arrayInputSize" type="number" name="quantity" min="1" max="5">
+    <textarea rows="4" cols="50" id="textAreaSorted">
+        Sorted List
+    </textarea>
+
 
 
 <script type="text/javascript">
 
-    function printArrayRandom(){
+    function buttonRandomGeneration(){
         var size = $('#arrayInputSize').val();
-        var arrayRand = generateRandomArray(size);
-        $('#textAreaRandom').val(arrayRand);
-        $('#textAreaRandomCount').html(arrayRand.length);
+        if (size > 0){
+            var arrayRand = generateRandomArray(size);
+            $('#textAreaRandom').val(arrayRand);
+            //$('#textAreaRandomCount').html(arrayRand.length);
+           // $('#textAreaSorted').val(quickSort(arrayRand)); 
+        }
+    }
+
+    function buttonSort(){
+        var strArray = $('#textAreaRandom').val();
+        var radioAlg = $('input[name=algorithm]:checked').val();
+        if (strArray){
+            //parse de string para array
+            var array = strArray.split(",").map(Number);
+            var sortedArray;
+
+            switch(radioAlg){
+                case 'quickSort'     : sortedArray = quickSort(array); break;
+                case 'insertionSort' : sortedArray = insertionSort(array); break;
+            }
+
+            $('#textAreaSorted').val(sortedArray); 
+        }
     }
     
     ////////////////////////////////////////////
@@ -45,10 +84,59 @@
     }
 
     ////////////////////////////////////////////
-    // Gera e retorna um númerom inteiro entre [1, 2000]
-    function sortInput(sortAlgorithm, ){
+    // Ordena um array recebido como parametro pela funcao recebida também
+    function sort(sortAlgorithm, array ){
+        return sortAlgorithm(array);
+    }
 
-        return Math.floor((Math.random() * 2000) + 1); 
+    /* QUICK SORT */
+    function quickSort (array){
+        function Partition(inputArray, low, high){
+            var pivot = inputArray[low];
+            var leftwall = low;
+            var aux;
+
+            for (i = low + 1; i <= high; i++){
+                if (inputArray[i] < pivot){
+                     leftwall++;
+                     aux = inputArray[i]; 
+                     inputArray[i] = inputArray[leftwall];
+                     inputArray[leftwall] = aux;
+                }
+            }
+            aux = inputArray[low]; 
+            inputArray[low] = inputArray[leftwall];
+            inputArray[leftwall] = aux;
+
+            return (leftwall);
+        }
+
+        function Merge(inputArray, low, high){
+            if (low < high){
+                pivot_location = Partition(inputArray,low,high)
+                Merge(inputArray, low, pivot_location)
+                Merge(inputArray, pivot_location + 1, high)
+            }
+         }
+
+         Merge(array, 0, array.length-1);
+         return array;
+     }
+
+    /* INSERTION SORT */
+    function insertionSort(array) {
+        var chosed;
+        var i, j;
+        for (i = 1; i < array.length; i++) {
+            chosed = array[i];
+            j = i;
+            while ((j > 0) && (array[j - 1] > chosed)) {
+                array[j] = array[j - 1];
+                j = j - 1;
+            }
+            array[j] = chosed;
+        }
+        return array;
     }
   
 </script>
