@@ -1,0 +1,308 @@
+<hmtl>
+  <head>
+    <title>
+      "Sort Algorithms"
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> <!-- Bootstrap CSS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script> <!-- Bootstrap JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/intro.js/1.1.1/introjs-rtl.min.css"> <!-- Intro JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/intro.js/1.1.1/introjs.min.css"> <!-- Intro JS -->
+  </head>
+
+  <body id="centro2">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->	
+	<script src="https://cdn.jsdelivr.net/intro.js/1.1.1/intro.min.js"></script> <!-- Intro JS -->
+	
+<!-- NAVIGATION BAR -->    	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- TITULO -->
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Sort Algorithms</a>
+			</div>
+
+			<!-- RESTO -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="nav navbar-nav">
+				<ul class="nav navbar-nav navbar-right">
+				<li><a href="#" id="aHelpMe" onclick="initGuide()">Help me!</a></li>
+			  </ul>
+			</div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+	</nav>
+ 
+
+<!-- ENTRADA DO ARRAY -->  
+<div>  
+    <div style="float: left">
+    	<div data-intro='Defina o tamanho do array a ser gerado' data-step='1'>
+            <label for="quantity">Size</label>
+    		<input id="arrayInputSize" type="number" name="quantity" min="1" max="500" value="10">
+    	</div>
+        <br><br>
+
+    	<div data-intro='Aperte para gerar o array!' data-step='2' style="float: left">	
+    		<button type="button" onclick="buttonRandomGeneration()">Random Generation</button>
+    	</div>
+    </div>
+    <br><br>
+
+    <div style="float: right">
+        <textarea rows="4" cols="50" id="textAreaRandom">
+            Press the button to generate random numbers
+        </textarea>
+    </div>
+
+    <div style="clear: both">
+       <!-- apenas usado para deixar as divs floats organizadas -->
+    </div>
+</div>
+
+<br><br>
+
+<div>
+<!--    NAV TABS     -->
+    <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao">
+        <!-- QUICKSORT -->
+        <li role="presentation" class="active" name="quicksort"><a href="#quicksort" aria-controls="quicksort" role="tab" data-toggle="tab">Quick Sort</a></li>
+        <!-- INSERTIONSORT -->
+        <li role="presentation" name="insertionsort"><a href="#insertionsort" aria-controls="insertionsort" role="tab" data-toggle="tab">Insertion Sort</a></li>
+        <!-- FUCKSORT -->
+        <li role="presentation"><a href="#">FuckSort</a></li>
+    </ul>
+
+<!--    TAB PANES     -->
+     <div class="tab-content">
+
+        <!-- QUICKSORT -->
+        <div role="tabpanel" class="tab-pane active" id="quicksort">
+            <button type="button" onclick="buttonSort()">Sort!</button>
+            <br>
+
+            <button type="button" onclick="printChart()">Print Chart</button>
+            <br><br>
+
+            <textarea rows="4" cols="50" id="textResultquicksort">
+                Quick Sort
+            </textarea>
+            <br>
+            <canvas id="quicksortChart" width="300" height="400"></canvas>
+
+        </div>
+
+        <!-- INSERTIONSORT -->
+        <div role="tabpanel" class="tab-pane" id="insertionsort">
+             <button type="button" onclick="buttonSort()">Sort!</button>
+            <br>
+
+            <button type="button" onclick="printChart()">Print Chart</button>
+            <br><br>
+
+            <textarea rows="4" cols="50" id="textResultinsertionsort">
+                Insertion Sort
+            </textarea>
+            <br>
+            <canvas id="insertionsortChart" width="300" height="400"></canvas>
+        </div>
+
+           
+        <!-- FUCKSORT -->
+        <div role="tabpanel" class="tab-pane" id="insertionsort">
+      
+        </div>
+</div>
+
+<script type="text/javascript">
+	/***************************
+	 **
+	 **  jQuery page start
+	 **
+     ***************************/ 
+	$( document ).ready(function() {
+		//$('#aHelpMe').click( buttonInitGuide() );
+	});
+	
+    /***************************
+	**
+	**  HTML Buttons
+	**
+    ***************************/
+    function buttonRandomGeneration(){
+        var size = $('#arrayInputSize').val();
+        if (size > 0){
+            var arrayRand = generateRandomArray(size);
+            $('#textAreaRandom').val(arrayRand);
+            //$('#textAreaRandomCount').html(arrayRand.length);
+           // $('#textAreaSorted').val(quickSort(arrayRand)); 
+        }
+    }
+    function buttonSort(){
+        var strArray = $('#textAreaRandom').val();
+        //var radioAlg = $('input[name=algorithm]:checked').val();
+        var radioAlg = $("ul#tabsAlgoritmosOrdenacao li.active").attr('name');
+        if (strArray){
+            //parse de string para array
+            var array = strArray.split(",").map(Number);
+            var sortedArray;
+            switch(radioAlg){
+                case 'quicksort'     : sortedArray = quickSort(array); break;
+                case 'insertionsort' : sortedArray = insertionSort(array); break;
+            }
+            $('#textResult'+radioAlg).val(sortedArray); 
+        }
+    }
+    function printChart(){
+        var radioAlg = $("ul#tabsAlgoritmosOrdenacao li.active").attr('name');
+        // Get context with jQuery - using jQuery's .get() method.
+        var ctx = $('#'+radioAlg+'Chart').get(0).getContext("2d");
+        //Lê dados ordenados em formato de string e faz parse para array
+        var strArray = $('#textResult'+radioAlg).val();
+        var array = strArray.split(",").map(Number);
+        var data = encodeToJSON(array);
+        var options = setChartOptions();
+        // This will get the first returned node in the jQuery collection.
+        // var myNewChart = new Chart(ctx);
+        var myBarChart = new Chart(ctx).Bar(data, '');
+    }
+	
+	function initGuide(){
+        introJs().start();
+    }
+	
+	
+	/***************************
+	**
+	**  Data Handler
+	**
+    ***************************/
+	// Processa um array de dados e transforma em um objeto JSON
+    function encodeToJSON(array){
+        var strLabels =  '"labels" : [';
+        var strData =  '"data" : [';
+        // Percorre todo array de dados
+        for (i = 1; i < array.length; i++) {
+            if ( i == 1){
+                strLabels = strLabels +'"'+array[i]+'"';
+                strData = strData +'"'+array[i]+'"';
+            } else {
+                strLabels = strLabels +', "'+array[i]+'"';
+                strData = strData +', "'+array[i]+'"';
+            }
+        }
+        
+        strLabels = strLabels + ']';
+        strData = strData + ']';
+        var strDataSets = '"datasets" : [' + ' { '+ strData + ' } ' + ' ]';
+        var strResult = '{ ' + strLabels +','+ strDataSets +'}';
+        var jsonObj = JSON.parse(strResult);
+        return(jsonObj);
+    }
+    
+    ////////////////////////////////////////////
+    // Retorna array de tamanho 'size' com numeros randomicos
+    function generateRandomArray(size){
+        var array = [];
+        for (i = 0; i < size ; i++){
+            array.push(generateRandomNumber());
+        } 
+        return array;      
+    }
+    
+    ////////////////////////////////////////////
+    // Gera e retorna um númerom inteiro entre [1, 2000]
+    function generateRandomNumber(){
+        return Math.floor((Math.random() * 2000) + 1); 
+    }
+	
+	/***************************
+	**
+	**  Sort Algorithms
+	**
+    ***************************/
+    ////////////////////////////////////////////
+    // Ordena um array recebido como parametro pela funcao recebida também
+    function sort(sortAlgorithm, array ){
+        return sortAlgorithm(array);
+    }
+    /* QUICK SORT */
+    function quickSort (array){
+        function Partition(inputArray, low, high){
+            var pivot = inputArray[low];
+            var leftwall = low;
+            var aux;
+            for (i = low + 1; i <= high; i++){
+                if (inputArray[i] < pivot){
+                     leftwall++;
+                     aux = inputArray[i]; 
+                     inputArray[i] = inputArray[leftwall];
+                     inputArray[leftwall] = aux;
+                }
+            }
+            aux = inputArray[low]; 
+            inputArray[low] = inputArray[leftwall];
+            inputArray[leftwall] = aux;
+            return (leftwall);
+        }
+        function Merge(inputArray, low, high){
+            if (low < high){
+                pivot_location = Partition(inputArray,low,high)
+                Merge(inputArray, low, pivot_location)
+                Merge(inputArray, pivot_location + 1, high)
+            }
+         }
+         Merge(array, 0, array.length-1);
+         return array;
+     }
+    /* INSERTION SORT */
+    function insertionSort(array) {
+        var chosed;
+        var i, j;
+        for (i = 1; i < array.length; i++) {
+            chosed = array[i];
+            j = i;
+            while ((j > 0) && (array[j - 1] > chosed)) {
+                array[j] = array[j - 1];
+                j = j - 1;
+            }
+            array[j] = chosed;
+        }
+        return array;
+    }
+	
+	/***************************
+	**
+	**  Chart Options
+	**
+    ***************************/
+    function setChartOptions(){
+       var options = '{';
+       options =  options + ' "responsive"               : "true",';   
+       options =  options + ' "maintainAspectRatio"      : "false",';    
+       options =  options + ' "showTooltips"             : "false",';
+       options =  options + ' "scaleBeginAtZero"         : "true",';
+       options =  options + ' "scaleShowGridLines"       : "true",';
+       options =  options + ' "scaleGridLineColor"       : "rgba(0,0,0,.05)",';
+       options =  options + ' "scaleGridLineWidth"       : 1,';
+       options =  options + ' "scaleShowHorizontalLines" : true,';
+       options =  options + ' "scaleShowVerticalLines"   : true,';
+       options =  options + ' "barShowStroke"            : true,';
+       options =  options + ' "barStrokeWidth"           : 2,';
+       options =  options + ' "barValueSpacing"          : 5,';
+       options =  options + ' "barDatasetSpacing"        : 1 }';
+        var jsonObj = JSON.parse(options);
+        return(jsonObj);
+    }
+  
+	</script>
+
+  </body>
+</html>
