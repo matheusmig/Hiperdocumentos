@@ -7,14 +7,14 @@
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> <!-- Bootstrap CSS -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script> <!-- Bootstrap JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/intro.js/1.1.1/introjs-rtl.min.css"> <!-- Intro JS -->
+
+    <script src="https://cdn.jsdelivr.net/intro.js/1.1.1/intro.min.js"></script> <!-- Intro JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/intro.js/1.1.1/introjs.min.css"> <!-- Intro JS -->
   </head>
 
   <body id="centro2">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->	
-	<script src="https://cdn.jsdelivr.net/intro.js/1.1.1/intro.min.js"></script> <!-- Intro JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->
 	
 <!-- NAVIGATION BAR -->    	
 	<nav class="navbar navbar-default">
@@ -62,7 +62,7 @@
 
     <div>
     <!--    NAV TABS     -->
-        <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao">
+        <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao" id="tabsAlgorithms">
             <!-- QUICKSORT -->
             <li role="presentation" class="active" name="quicksort"><a href="#quicksort" aria-controls="quicksort" role="tab" data-toggle="tab">Quick Sort</a></li>
             <!-- INSERTIONSORT -->
@@ -76,16 +76,16 @@
 
             <!-- QUICKSORT -->
             <div role="tabpanel" class="tab-pane active" id="quicksort">
-                <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>
+                <button type="button" class="btn btn-default" id="quicksortButton" onclick="buttonSort()">Sort!</button>
                 <br>
 
-                 <div class="form-group">
+                 <div class="form-group" id="quicksortSortedArray" >
                         <label for="textResultquicksort">Sorted array:</label>
                         <textarea class="form-control" rows="5" id="textResultquicksort"></textarea>
                 </div>
                 <br>               
                 
-                <button type="button" class="btn btn-default" onclick="printChart()">Print Chart</button>
+                <button type="button" class="btn btn-default" id="quicksortChartButton" onclick="printChart()">Print Chart</button>
                 <br><br>
 
 
@@ -243,8 +243,8 @@
             inputArray[leftwall] = aux;
             return (leftwall);
         }
-        function Merge(inputArray, low, high){
-            if (low < high){
+    function Merge(inputArray, low, high){
+        if (low < high){
                 pivot_location = Partition(inputArray,low,high)
                 Merge(inputArray, low, pivot_location)
                 Merge(inputArray, pivot_location + 1, high)
@@ -308,12 +308,12 @@
     // Guide, onde o usuario NAO pode navegar entre as opcoes
     function initGuide(){
         var stepsCount = 0;
-        var MAXSTEPS = 1;
+        var MAXSTEPS = 3;
         var intro = introJs()
         intro.setOptions({
             steps: [
               { 
-                intro: "!Comecando tutorial!"
+                intro: "Comecando tutorial!"
               },
               {
                 element: '#guideStep1',
@@ -329,8 +329,34 @@
                 element: '#guideStep3',
                 intro: 'Veja o array gerado',
                 position: 'top'
+              },
+              {
+                element: '#tabsAlgorithms',
+                intro: 'Escolha o algoritmo de ordenação',
+                position: 'top'
+              },
+              {
+                element: '#quicksortButton',
+                intro: 'Pressione o botão para fazer a ordenacão',
+                position: 'bottom'
+              },
+              {
+                element: '#quicksortSortedArray',
+                intro: 'Array ordenado',
+                position: 'bottom'
+              },
+              {
+                element: '#quicksortChartButton',
+                intro: 'Pressione o botão para mostrar o gráfico',
+                position: 'bottom'
+              },
+              {
+                element: '#quicksortChart',
+                intro: 'Gráfico do array ordenado',
+                position: 'bottom'
               }
             ]
+
           });
 
         intro.setOption("showButtons", false);
@@ -345,11 +371,19 @@
         intro.start()
 
 
-        intro.onchange(function(targetElement) {
+        //////////////////////////////////////////
+        // Funções aplicadas entre as transições
+        intro.onafterchange(function(targetElement) {
             if (targetElement.id == "guideStep3")
                 buttonRandomGeneration();
 
-            if (stepsCount >= MAXSTEPS)
+            if (targetElement.id == "quicksortButton")
+               buttonSort();
+
+            if (targetElement.id == "quicksortChartButton")
+               printChart();
+
+            if (targetElement.id == "quicksortChart")
                clearInterval(stepsCount);
         });
         stepsCount = setInterval(function(){intro.nextStep();}, 5000); //a cada 2m5 segundos chama next step, o numero chamado sera igual a timer
