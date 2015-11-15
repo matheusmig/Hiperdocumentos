@@ -41,7 +41,7 @@
 		  </div><!-- /.container-fluid -->
 	</nav>
  
-<div class="container pagination-centered" role="main"> <!-- centra conteudo -->
+<div class="container pagination-centered" role="main"> <!-- centra o conteudo -->
     <!-- ENTRADA DO ARRAY -->  
     <form class="form-inline">
         <div class="form-group" data-intro='Defina o tamanho do array a ser gerado' data-step='1' id="guideStep1">
@@ -64,54 +64,227 @@
     <!--    NAV TABS     -->
         <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao" id="tabsAlgorithms">
             <!-- QUICKSORT -->
-            <li role="presentation" class="active" name="quicksort"><a href="#quicksort" aria-controls="quicksort" role="tab" data-toggle="tab">Quick Sort</a></li>
+            <li role="presentation" class="active" name="quicksort"><a href="#quicksort" aria-controls="quicksort" role="tab" data-toggle="tab" >Quick Sort</a></li>
             <!-- INSERTIONSORT -->
             <li role="presentation" name="insertionsort"><a href="#insertionsort" aria-controls="insertionsort" role="tab" data-toggle="tab">Insertion Sort</a></li>
-            <!-- FUCKSORT -->
-            <li role="presentation"><a href="#">FuckSort</a></li>
+            <!-- BUBBLESORT -->
+            <li role="presentation" name="bubblesort"><a href="#bubblesort" aria-controls="bubblesort" role="tab" data-toggle="tab">Bubble Sort</a></li>
+            <!-- SELECTIONSORT -->
+            <li role="presentation" name="selectionsort"><a href="#selectionsort" aria-controls="selectionsort" role="tab" data-toggle="tab">Selection Sort</a></li>
+
         </ul>
 
     <!--    TAB PANES     -->
          <div class="tab-content">
-
-            <!-- QUICKSORT -->
-            <div role="tabpanel" class="tab-pane active" id="quicksort">
-                <button type="button" class="btn btn-default" id="quicksortButton" onclick="buttonSort()">Sort!</button>
+            <!-- SELECTIONSORT -->
+            <div role="tabpanel" class="tab-pane active" id="selectionsort">
+                <!-- basic info-->
+                <h4> Complexity: </h4>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Average Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Best Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
                 <br>
-
-                 <div class="form-group" id="quicksortSortedArray" >
-                        <label for="textResultquicksort">Sorted array:</label>
-                        <textarea class="form-control" rows="5" id="textResultquicksort"></textarea>
+                <!-- buttons -->
+                <button type="button" class="btn btn-default" id="selectionsortButton" onclick="buttonSort()">Sort!</button>
+                <button type="button" class="btn btn-default" id="selectionsortMoreInfo" data-toggle="modal" data-target="#selectionsortModal">More info...</button>
+                <br>
+                <!-- modal -->
+                <div class="modal fade" id="selectionsortModal" tabindex="-1" role="dialog" aria-labelledby="selectionsortModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="quicksortModalLabel">Selection sort</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>In computer science, selection sort is a sorting algorithm, specifically an in-place comparison sort. It has O(n2) time complexity, making it inefficient on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its simplicity, and it has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.</p>
+                            <p>The algorithm divides the input list into two parts: the sublist of items already sorted, which is built up from left to right at the front (left) of the list, and the sublist of items remaining to be sorted that occupy the rest of the list. Initially, the sorted sublist is empty and the unsorted sublist is the entire input list. The algorithm proceeds by finding the smallest (or largest, depending on sorting order) element in the unsorted sublist, exchanging (swapping) it with the leftmost unsorted element (putting it in sorted order), and moving the sublist boundaries one element to the right.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Selection-Sort-Animation.gif" class="img-responsive centered" alt="Responsive image">
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- sorted array -->  
+                <div class="form-group" id="selectionsortSortedArray" >
+                    <label for="textResultselectionsort">Sorted array:</label>
+                    <textarea class="form-control" rows="5" id="textResultselectionsort"></textarea>
                 </div>
                 <br>               
-                
+                <!-- chart -->
+                <button type="button" class="btn btn-default" id="selectionsortChartButton" onclick="printChart()">Print Chart</button>
+                <br><br>
+                <canvas id="selectionsortChart" width="300" height="400"></canvas>
+            </div>
+            
+            <!-- QUICKSORT -->
+            <div role="tabpanel" class="tab-pane active" id="quicksort">
+                <!-- basic info-->
+                <h4> Complexity: </h4>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Average Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n logn)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Best Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n logn)</p></div>
+                </div>
+                <br>
+                <!-- buttons -->
+                <button type="button" class="btn btn-default" id="quicksortButton" onclick="buttonSort()">Sort!</button>
+                <button type="button" class="btn btn-default" id="quicksortMoreInfo" data-toggle="modal" data-target="#quicksortModal">More info...</button>
+                <br>
+                <!-- modal -->
+                <div class="modal fade" id="quicksortModal" tabindex="-1" role="dialog" aria-labelledby="quicksortModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="quicksortModalLabel">Quick sort</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p> Quicksort (sometimes called partition-exchange sort) is an efficient sorting algorithm, serving as a systematic method for placing the elements of an array in order. Developed by Tony Hoare in 1959,[1] with his work published in 1961,[2] it is still a commonly used algorithm for sorting. When implemented well, it can be about two or three times faster than its main competitors, merge sort and heapsort.</p>
+                            <p> Quicksort is a comparison sort, meaning that it can sort items of any type for which a "less-than" relation (formally, a total order) is defined. In efficient implementations it is not a stable sort, meaning that the relative order of equal sort items is not preserved. Quicksort can operate in-place on an array, requiring small additional amounts of memory to perform the sorting.</p>
+                            <p> Mathematical analysis of quicksort shows that, on average, the algorithm takes O(n log n) comparisons to sort n items. In the worst case, it makes O(n2) comparisons, though this behavior is rare.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" class="img-responsive centered" alt="Responsive image">
+                       </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- sorted array -->  
+                <div class="form-group" id="quicksortSortedArray" >
+                    <label for="textResultquicksort">Sorted array:</label>
+                    <textarea class="form-control" rows="5" id="textResultquicksort"></textarea>
+                </div>
+                <br>               
+                <!-- chart -->
                 <button type="button" class="btn btn-default" id="quicksortChartButton" onclick="printChart()">Print Chart</button>
                 <br><br>
-
-
                 <canvas id="quicksortChart" width="300" height="400"></canvas>
-
             </div>
 
             <!-- INSERTIONSORT -->
             <div role="tabpanel" class="tab-pane" id="insertionsort">
-                 <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>
-                <br>
-
-                <div class="form-group">
-                        <label for="textResultinsertionsort">Sorted array:</label>
-                        <textarea class="form-control" rows="5" id="textResultinsertionsort"></textarea>
+                <!-- basic info-->
+                <h4> Complexity: </h4>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Average Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Best Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n)</p></div>
                 </div>
                 <br>
+                <!-- buttons -->
+                <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>                
+                <button type="button" class="btn btn-default" id="insertionsortMoreInfo" data-toggle="modal" data-target="#insertionsortModal">More info...</button>
+                <br>
+                <!-- modal -->
+                <div class="modal fade" id="insertionsortModal" tabindex="-1" role="dialog" aria-labelledby="insertionsortModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="insertionsortModalLabel">Insertion Sort</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif" class="img-responsive centered" alt="Responsive image">  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- sorted array -->
+                <div class="form-group">
+                    <label for="textResultinsertionsort">Sorted array:</label>
+                    <textarea class="form-control" rows="5" id="textResultinsertionsort"></textarea>
+                </div>
+                <br>
+                <!-- chart -->
                 <button type="button" class="btn btn-default" onclick="printChart()">Print Chart</button>
                 <br><br>
 
                 <canvas id="insertionsortChart" width="300" height="400"></canvas>
             </div>
 
-               
-            <!-- FUCKSORT -->
-            <div role="tabpanel" class="tab-pane" id="insertionsort">
+            <!-- BUBBLE SORTT -->
+            <div role="tabpanel" class="tab-pane" id="bubblesort">
+                <!-- basic info-->
+                <h4> Complexity: </h4>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Average Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2"><p class="text-left">Best Case: </p></div>
+                  <div class="col-md-4"><p class="text-left">O(n)</p></div>
+                </div>
+                <br>
+                <!-- buttons -->
+                <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>                
+                <button type="button" class="btn btn-default" id="bubblesortMoreInfo" data-toggle="modal" data-target="#bubblesortModal">More info...</button>
+                <br>
+                <!-- modal -->
+                <div class="modal fade" id="bubblesortModal" tabindex="-1" role="dialog" aria-labelledby="bubblesortModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="bubblesortModalLabel">Bubble Sort</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares each pair of adjacent items and swaps them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted. The algorithm, which is a comparison sort, is named for the way smaller elements "bubble" to the top of the list. Although the algorithm is simple, it is too slow and impractical for most problems even when compared to insertion sort.[1] It can be practical if the input is usually in sort order but may occasionally have some out-of-order elements nearly in position.</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif" class="img-responsive center" alt="Responsive image">  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- sorted array -->
+                <div class="form-group">
+                    <label for="textResultbubblesort">Sorted array:</label>
+                    <textarea class="form-control" rows="5" id="textResultbubblesort"></textarea>
+                </div>
+                <br>
+                <!-- chart -->
+                <button type="button" class="btn btn-default" onclick="printChart()">Print Chart</button>
+                <br><br>
+
+                <canvas id="bubblesorttChart" width="300" height="400"></canvas>
+            </div>   
+
           
             </div>
     </div>
@@ -136,13 +309,10 @@
         if (size > 0){
             var arrayRand = generateRandomArray(size);
             $('#textAreaRandom').val(arrayRand);
-            //$('#textAreaRandomCount').html(arrayRand.length);
-           // $('#textAreaSorted').val(quickSort(arrayRand)); 
         }
     }
     function buttonSort(){
         var strArray = $('#textAreaRandom').val();
-        //var radioAlg = $('input[name=algorithm]:checked').val();
         var radioAlg = $("ul#tabsAlgoritmosOrdenacao li.active").attr('name');
         if (strArray){
             //parse de string para array
@@ -151,6 +321,7 @@
             switch(radioAlg){
                 case 'quicksort'     : sortedArray = quickSort(array); break;
                 case 'insertionsort' : sortedArray = insertionSort(array); break;
+                case 'bubblesort'    : sortedArray = bubbleSort(array); break;
             }
             $('#textResult'+radioAlg).val(sortedArray); 
         }
@@ -267,6 +438,39 @@
             array[j] = chosed;
         }
         return array;
+    }
+    /* BUBBLE SORT */
+    function bubbleSort(array){
+        var aux;
+        for(i = array.length; i >= 1; i--) {  
+            for(j = 0; j < i ; j++) {
+                if(array[j] > array[j+1]) {
+                    aux = array[j];
+                    array[j] = array[j+1];
+                    array[j+1] = aux;        
+                }
+            }
+        }
+        return array;
+    }
+    
+    /* SELECTION SORT */
+    function selectionSort(array){
+        var aux;
+        var iMin;
+        for (j = 0; j < array.length-1; j++) {
+            iMin = j;
+            for ( i = j+1; i < array.length; i++) {
+                if (array[i] < array[iMin]) {
+                    iMin = i;
+                }
+            }
+            if(iMin != j) {
+                aux = array[j];
+                array[j] = array[iMin];
+                array[iMin] = aux;   
+            }
+        }
     }
 	
 	/***************************
