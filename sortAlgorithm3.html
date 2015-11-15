@@ -34,93 +34,88 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			  <ul class="nav navbar-nav">
 				<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" id="aHelpMe" onclick="initGuide()">Help me!</a></li>
+				<li><a href="#" id="aHelpMe" onclick="initHelp()">Help me!</a></li>
+                <li><a href="#" id="aGuideMe" onclick="initGuide()">Guide me!</a></li>
 			  </ul>
 			</div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 	</nav>
  
-
-<!-- ENTRADA DO ARRAY -->  
-<div>  
-    <div style="float: left">
-    	<div data-intro='Defina o tamanho do array a ser gerado' data-step='1'>
-            <label for="quantity">Size</label>
-    		<input id="arrayInputSize" type="number" name="quantity" min="1" max="500" value="10">
-    	</div>
-        <br><br>
-
-    	<div data-intro='Aperte para gerar o array!' data-step='2' style="float: left">	
-    		<button type="button" onclick="buttonRandomGeneration()">Random Generation</button>
-    	</div>
+<div class="container pagination-centered" role="main"> <!-- centra conteudo -->
+    <!-- ENTRADA DO ARRAY -->  
+    <form class="form-inline">
+        <div class="form-group" data-intro='Defina o tamanho do array a ser gerado' data-step='1' id="guideStep1">
+            <label for="arrayInputSize">Size</label>
+            <input type="number" class="form-control" id="arrayInputSize" name="quantity" min="1" max="500" value="10">
+        </div>
+        <div class="form-group" data-intro='Aperte para gerar o array!' data-step='2' id='guideStep2'> 
+            <button type="button" class="btn btn-default" onclick="buttonRandomGeneration()">Random Generation</button>
+        </div>
+    </form>
+    <div class="form-group" id="guideStep3">
+            <label for="textAreaRandom">Random array generated:</label>
+            <textarea class="form-control" rows="5" id="textAreaRandom"></textarea>
     </div>
+
+
     <br><br>
 
-    <div style="float: right">
-        <textarea rows="4" cols="50" id="textAreaRandom">
-            Press the button to generate random numbers
-        </textarea>
+    <div>
+    <!--    NAV TABS     -->
+        <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao">
+            <!-- QUICKSORT -->
+            <li role="presentation" class="active" name="quicksort"><a href="#quicksort" aria-controls="quicksort" role="tab" data-toggle="tab">Quick Sort</a></li>
+            <!-- INSERTIONSORT -->
+            <li role="presentation" name="insertionsort"><a href="#insertionsort" aria-controls="insertionsort" role="tab" data-toggle="tab">Insertion Sort</a></li>
+            <!-- FUCKSORT -->
+            <li role="presentation"><a href="#">FuckSort</a></li>
+        </ul>
+
+    <!--    TAB PANES     -->
+         <div class="tab-content">
+
+            <!-- QUICKSORT -->
+            <div role="tabpanel" class="tab-pane active" id="quicksort">
+                <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>
+                <br>
+
+                 <div class="form-group">
+                        <label for="textResultquicksort">Sorted array:</label>
+                        <textarea class="form-control" rows="5" id="textResultquicksort"></textarea>
+                </div>
+                <br>               
+                
+                <button type="button" class="btn btn-default" onclick="printChart()">Print Chart</button>
+                <br><br>
+
+
+                <canvas id="quicksortChart" width="300" height="400"></canvas>
+
+            </div>
+
+            <!-- INSERTIONSORT -->
+            <div role="tabpanel" class="tab-pane" id="insertionsort">
+                 <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>
+                <br>
+
+                <div class="form-group">
+                        <label for="textResultinsertionsort">Sorted array:</label>
+                        <textarea class="form-control" rows="5" id="textResultinsertionsort"></textarea>
+                </div>
+                <br>
+                <button type="button" class="btn btn-default" onclick="printChart()">Print Chart</button>
+                <br><br>
+
+                <canvas id="insertionsortChart" width="300" height="400"></canvas>
+            </div>
+
+               
+            <!-- FUCKSORT -->
+            <div role="tabpanel" class="tab-pane" id="insertionsort">
+          
+            </div>
     </div>
-
-    <div style="clear: both">
-       <!-- apenas usado para deixar as divs floats organizadas -->
-    </div>
-</div>
-
-<br><br>
-
-<div>
-<!--    NAV TABS     -->
-    <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao">
-        <!-- QUICKSORT -->
-        <li role="presentation" class="active" name="quicksort"><a href="#quicksort" aria-controls="quicksort" role="tab" data-toggle="tab">Quick Sort</a></li>
-        <!-- INSERTIONSORT -->
-        <li role="presentation" name="insertionsort"><a href="#insertionsort" aria-controls="insertionsort" role="tab" data-toggle="tab">Insertion Sort</a></li>
-        <!-- FUCKSORT -->
-        <li role="presentation"><a href="#">FuckSort</a></li>
-    </ul>
-
-<!--    TAB PANES     -->
-     <div class="tab-content">
-
-        <!-- QUICKSORT -->
-        <div role="tabpanel" class="tab-pane active" id="quicksort">
-            <button type="button" onclick="buttonSort()">Sort!</button>
-            <br>
-
-            <button type="button" onclick="printChart()">Print Chart</button>
-            <br><br>
-
-            <textarea rows="4" cols="50" id="textResultquicksort">
-                Quick Sort
-            </textarea>
-            <br>
-            <canvas id="quicksortChart" width="300" height="400"></canvas>
-
-        </div>
-
-        <!-- INSERTIONSORT -->
-        <div role="tabpanel" class="tab-pane" id="insertionsort">
-             <button type="button" onclick="buttonSort()">Sort!</button>
-            <br>
-
-            <button type="button" onclick="printChart()">Print Chart</button>
-            <br><br>
-
-            <textarea rows="4" cols="50" id="textResultinsertionsort">
-                Insertion Sort
-            </textarea>
-            <br>
-            <canvas id="insertionsortChart" width="300" height="400"></canvas>
-        </div>
-
-           
-        <!-- FUCKSORT -->
-        <div role="tabpanel" class="tab-pane" id="insertionsort">
-      
-        </div>
-</div>
-
+</div> <!-- div de centered content-->
 <script type="text/javascript">
 	/***************************
 	 **
@@ -172,10 +167,6 @@
         // This will get the first returned node in the jQuery collection.
         // var myNewChart = new Chart(ctx);
         var myBarChart = new Chart(ctx).Bar(data, '');
-    }
-	
-	function initGuide(){
-        introJs().start();
     }
 	
 	
@@ -300,6 +291,69 @@
        options =  options + ' "barDatasetSpacing"        : 1 }';
         var jsonObj = JSON.parse(options);
         return(jsonObj);
+    }
+
+    /***************************
+     **
+     **  Guide & Help
+     **
+     ***************************/ 
+    //////////////////////////////////////////////////////////
+    // Help, onde o usuario pode navegar entre as opcoes
+    function initHelp(){
+        introJs().start();
+    }
+
+    //////////////////////////////////////////////////////////
+    // Guide, onde o usuario NAO pode navegar entre as opcoes
+    function initGuide(){
+        var stepsCount = 0;
+        var MAXSTEPS = 1;
+        var intro = introJs()
+        intro.setOptions({
+            steps: [
+              { 
+                intro: "!Comecando tutorial!"
+              },
+              {
+                element: '#guideStep1',
+                intro: "Defina o tamanho do array a ser gerado",
+                position: 'right'
+              },
+              {
+                element: '#guideStep2',
+                intro: "Pressione este botão para gerar o array!",
+                position: 'right'
+              },
+              {
+                element: '#guideStep3',
+                intro: 'Veja o array gerado',
+                position: 'top'
+              }
+            ]
+          });
+
+        intro.setOption("showButtons", false);
+        //intro.setOption("keyboardNavigation", false);
+        intro.setOption("showBullets", false);
+        intro.setOption("scrollToElement", false);
+        intro.setOption("disableInteraction", false);
+        intro.setOption("exitOnOverlayClick", false);
+        intro.setOption("exitOnEsc", true);
+        intro.setOption("tooltipPosition", "right");
+
+        intro.start()
+
+
+        intro.onchange(function(targetElement) {
+            if (targetElement.id == "guideStep3")
+                buttonRandomGeneration();
+
+            if (stepsCount >= MAXSTEPS)
+               clearInterval(stepsCount);
+        });
+        stepsCount = setInterval(function(){intro.nextStep();}, 5000); //a cada 2m5 segundos chama next step, o numero chamado sera igual a timer
+
     }
   
 	</script>
