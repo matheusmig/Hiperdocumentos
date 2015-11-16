@@ -5,11 +5,10 @@
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> <!-- Bootstrap CSS -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script> <!-- Bootstrap JS -->
-
     <script src="https://cdn.jsdelivr.net/intro.js/1.1.1/intro.min.js"></script> <!-- Intro JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/intro.js/1.1.1/introjs.min.css"> <!-- Intro JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> <!-- Bootstrap CSS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script> <!-- Bootstrap JS -->
   </head>
 
   <body id="centro2">
@@ -59,8 +58,9 @@
 
 
     <br><br>
-
     <div>
+
+
     <!--    NAV TABS     -->
         <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao" id="tabsAlgorithms">
             <!-- QUICKSORT -->
@@ -116,6 +116,11 @@
                     </div>
                   </div>
                 </div>
+                <!-- chronometer -->
+                <div class="form-group" >
+                    <label for="selectionsortElapsedTime">Elapsed Time (ms): </label>
+                    <input type="text" class="form-control" id="selectionsortElapsedTime" name="elapsed" readonly>
+                </div>
                 <!-- sorted array -->  
                 <div class="form-group" id="selectionsortSortedArray" >
                     <label for="textResultselectionsort">Sorted array:</label>
@@ -169,6 +174,11 @@
                     </div>
                   </div>
                 </div>
+                <!-- chronometer -->
+                <div class="form-group" >
+                    <label for="quicksortElapsedTime">Elapsed Time (ms): </label>
+                    <input type="text" class="form-control" id="quicksortElapsedTime" name="elapsed" readonly>
+                </div>
                 <!-- sorted array -->  
                 <div class="form-group" id="quicksortSortedArray" >
                     <label for="textResultquicksort">Sorted array:</label>
@@ -219,6 +229,11 @@
                         </div>
                     </div>
                   </div>
+                </div>  
+                <!-- chronometer -->
+                <div class="form-group" >
+                    <label for="insertionsortElapsedTime">Elapsed Time (ms): </label>
+                    <input type="text" class="form-control" id="insertionsortElapsedTime" name="elapsed" readonly>
                 </div>
                 <!-- sorted array -->
                 <div class="form-group">
@@ -272,6 +287,11 @@
                     </div>
                   </div>
                 </div>
+                <!-- chronometer -->
+                <div class="form-group" >
+                    <label for="bubblesortElapsedTime">Elapsed Time (ms): </label>
+                    <input type="text" class="form-control" id="bubblesortElapsedTime" name="elapsed" readonly>
+                </div>
                 <!-- sorted array -->
                 <div class="form-group">
                     <label for="textResultbubblesort">Sorted array:</label>
@@ -318,11 +338,18 @@
             //parse de string para array
             var array = strArray.split(",").map(Number);
             var sortedArray;
+            //inicia cronometro
+            var stopwatch = new StopWatch();
+            stopwatch.start();
+            //executa algoritmo de ordenação
             switch(radioAlg){
                 case 'quicksort'     : sortedArray = quickSort(array); break;
                 case 'insertionsort' : sortedArray = insertionSort(array); break;
                 case 'bubblesort'    : sortedArray = bubbleSort(array); break;
             }
+            //para cronometro
+            stopwatch.stop();
+            $('#'+radioAlg+'ElapsedTime').val(stopwatch.getElapsedMilliseconds());
             $('#textResult'+radioAlg).val(sortedArray); 
         }
     }
@@ -384,6 +411,50 @@
     function generateRandomNumber(){
         return Math.floor((Math.random() * 2000) + 1); 
     }
+    
+    /***************************
+    **
+    **  Chronometer ( STOPWATCH )
+    **
+    ***************************/ 
+    var StopWatch = function (performance) {
+    this.startTime = 0;
+    this.stopTime = 0;
+    this.running = false;
+    this.performance = performance === false ? false : !!window.performance;
+    };
+
+    StopWatch.prototype.currentTime = function () {
+        return this.performance ? window.performance.now() : new Date().getTime();
+    };
+
+    StopWatch.prototype.start = function () {
+        this.startTime = this.currentTime();
+        this.running = true;
+    };
+
+    StopWatch.prototype.stop = function () {
+        this.stopTime = this.currentTime();
+        this.running = false;
+    };
+
+    StopWatch.prototype.getElapsedMilliseconds = function () {
+        if (this.running) {
+            this.stopTime = this.currentTime();
+        }
+
+        return this.stopTime - this.startTime;
+    };
+
+    StopWatch.prototype.getElapsedSeconds = function () {
+        return this.getElapsedMilliseconds() / 1000;
+    };
+
+    StopWatch.prototype.printElapsed = function (name) {
+        var currentName = name || 'Elapsed:';
+
+        console.log(currentName, '[' + this.getElapsedMilliseconds() + 'ms]', '[' + this.getElapsedSeconds() + 's]');
+    };
 	
 	/***************************
 	**
