@@ -368,7 +368,7 @@
                 case 'quicksort'     : sortedArray = quickSort(array); break;
                 case 'insertionsort' : sortedArray = insertionSort(array); break;
                 case 'bubblesort'    : sortedArray = bubbleSort(array); break;
-                case 'insertionsort' : sortedArray = insertionSort(array); break;
+                case 'selectionsort' : sortedArray = selectionSort(array); break;
             }
             //para cronometro
             stopwatch.stop();
@@ -565,6 +565,7 @@
                 array[iMin] = aux;   
             }
         }
+        return array;
     }
 	
 	/***************************
