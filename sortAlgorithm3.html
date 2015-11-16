@@ -12,9 +12,30 @@
   </head>
 
   <body id="centro2">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->
+<!-- INTRODUCTION MODAL -->
+    <div class="modal bs-example-modal-lg" id="initModal" tabindex="-1" role="dialog" aria-labelledby="initModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="initModalLabel">Bem-Vindo</h4>
+          </div>
+          <div class="modal-body">
+            <h5 class="text-center">TRABALHO FINAL DE HIPERDOCUMENTOS</h5>
+            <p class="text-center"> O objetivo deste trabalho é montar um hiperdocumento que traga informações sobre algoritmos de ordenação.</p>
+            <p class="text-center"> Algoritmos de ordenação são responsáveis por ordernar um conjunto de dados, há várias estratégias diferentes que podem ser adotadas ao ordernar um array, cada uma conta com uma complexidade temporal e espacial diferente.</p>
+            <img src="gifOrdenacao.gif" class="img-responsive center" alt="Responsive image">
+                   
+            <br><br><p><small>Autores: Matheus Mignoni e Amilcar Machado</small></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->
-	
 <!-- NAVIGATION BAR -->    	
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -316,7 +337,8 @@
 	 **
      ***************************/ 
 	$( document ).ready(function() {
-		//$('#aHelpMe').click( buttonInitGuide() );
+        //Abre modal de apresentação
+		$('#initModal').modal('show');
 	});
 	
     /***************************
@@ -577,14 +599,63 @@
     //////////////////////////////////////////////////////////
     // Help, onde o usuario pode navegar entre as opcoes
     function initHelp(){
-        introJs().start();
+        var intro = introJs()
+        intro.setOptions({
+            steps: [
+              {
+                element: '#guideStep1',
+                intro: "Defina o tamanho do array a ser gerado",
+                position: 'right'
+              },
+              {
+                element: '#guideStep2',
+                intro: "Pressione gerar randomicamente o array!",
+                position: 'right'
+              },
+              {
+                element: '#guideStep3',
+                intro: 'Array gerado!',
+                position: 'top'
+              },
+              {
+                element: '#tabsAlgorithms',
+                intro: 'Escolha o algoritmo de ordenação',
+                position: 'top'
+              },
+              {
+                element: '#quicksortButton',
+                intro: 'Pressione o botão para realizar a ordenacão',
+                position: 'bottom'
+              },
+              {
+                element: '#quicksortElapsedTime',
+                intro: 'Tempo decorrido durante a ordenação',
+                position: 'bottom'
+              },
+              {
+                element: '#quicksortSortedArray',
+                intro: 'Array ordenado',
+                position: 'bottom'
+              },
+              {
+                element: '#quicksortChartButton',
+                intro: 'Pressione o botão para mostrar o gráfico',
+                position: 'bottom'
+              },
+              {
+                element: '#quicksortChart',
+                intro: 'Gráfico do array ordenado',
+                position: 'top'
+              }
+            ]
+          });
+        intro.start()
     }
 
     //////////////////////////////////////////////////////////
     // Guide, onde o usuario NAO pode navegar entre as opcoes
     function initGuide(){
         var stepsCount = 0;
-        var MAXSTEPS = 3;
         var intro = introJs()
         intro.setOptions({
             steps: [
@@ -650,7 +721,6 @@
         intro.setOption("exitOnOverlayClick", false);
         intro.setOption("exitOnEsc", true);
         intro.setOption("tooltipPosition", "right");
-
         intro.start()
 
 
