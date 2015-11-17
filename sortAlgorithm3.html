@@ -23,10 +23,14 @@
           </div>
           <div class="modal-body">
             <h5 class="text-center">TRABALHO FINAL DE HIPERDOCUMENTOS</h5>
+            <br>
             <p class="text-center"> O objetivo deste trabalho é montar um hiperdocumento que traga informações sobre algoritmos de ordenação.</p>
+            <br>
             <p class="text-center"> Algoritmos de ordenação são responsáveis por ordernar um conjunto de dados, há várias estratégias diferentes que podem ser adotadas ao ordernar um array, cada uma conta com uma complexidade temporal e espacial diferente.</p>
+            <br>
             <img src="gifOrdenacao.gif" class="img-responsive center" alt="Responsive image">
-                   
+            Example: sorting a sound wave
+            <br>       
             <br><br><p><small>Autores: Matheus Mignoni e Amilcar Machado</small></p>
           </div>
           <div class="modal-footer">
@@ -100,19 +104,33 @@
             <!-- QUICKSORT -->
             <div role="tabpanel" class="tab-pane active" id="quicksort">
                 <!-- basic info-->
-                <h4> Complexity: </h4>
                 <div class="row">
-                  <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
-                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-2"><p class="text-left">Average Case: </p></div>
-                  <div class="col-md-4"><p class="text-left">O(n logn)</p></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-2"><p class="text-left">Best Case: </p></div>
-                  <div class="col-md-4"><p class="text-left">O(n logn)</p></div>
-                </div>
+                    <div class="col-md-6">
+                        <div class="row">                        
+                           <div class="col-md-2"> <h4> Complexity: </h4></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
+                          <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-2"><p class="text-left">Average Case: </p></div>
+                          <div class="col-md-4"><p class="text-left">O(n logn)</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-2"><p class="text-left">Best Case: </p></div>
+                          <div class="col-md-4"><p class="text-left">O(n logn)</p></div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-6 pull-right" >
+                        <div class="row">
+                            <iframe type="text/html" width="320" height="180" src="http://www.youtube.com/embed/ywWBy6J5gz8" frameborder="0"> </iframe>
+                        </div>
+                        <div class="row">
+                        What if QuickSort was a Folk dance?
+                        </div>
+                    </div>
+                </div>                     
                 <br>
                 <!-- buttons -->
                 <button type="button" class="btn btn-default" id="quicksortButton" onclick="buttonSort()">Sort!</button>
@@ -159,20 +177,33 @@
             <!-- INSERTIONSORT -->
             <div role="tabpanel" class="tab-pane" id="insertionsort">
                 <!-- basic info-->
-                <h4> Complexity: </h4>
                 <div class="row">
-                  <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
-                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-2"><p class="text-left">Average Case: </p></div>
-                  <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-2"><p class="text-left">Best Case: </p></div>
-                  <div class="col-md-4"><p class="text-left">O(n)</p></div>
-                </div>
-                <br>
+                    <div class="col-md-6">
+                        <div class="row">                        
+                           <div class="col-md-2"> <h4> Complexity: </h4></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-2"><p class="text-left">Worst Case: </p></div>
+                          <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-2"><p class="text-left">Average Case: </p></div>
+                          <div class="col-md-4"><p class="text-left">O(n^2)</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-2"><p class="text-left">Best Case: </p></div>
+                          <div class="col-md-4"><p class="text-left">O(n)</p></div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-6 pull-right" >
+                        <div class="row">
+                            <iframe type="text/html" width="320" height="180" src="http://www.youtube.com/embed/ROalU379l3U" frameborder="0"> </iframe>
+                        </div>
+                        <div class="row">
+                        What if InsertionSort was a Folk dance?
+                        </div>
+                    </div>
+                </div>   
                 <!-- buttons -->
                 <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>                
                 <button type="button" class="btn btn-default" id="insertionsortMoreInfo" data-toggle="modal" data-target="#insertionsortModal">More info...</button>
@@ -717,7 +748,7 @@
 
         intro.setOption("showButtons", false);
         intro.setOption("showBullets", false);
-        intro.setOption("scrollToElement", false);
+        intro.setOption("scrollToElement", true);
         intro.setOption("disableInteraction", false);
         intro.setOption("exitOnOverlayClick", false);
         intro.setOption("exitOnEsc", true);
