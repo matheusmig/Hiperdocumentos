@@ -134,6 +134,7 @@
                 <!-- buttons -->
                 <button type="button" class="btn btn-default" id="quicksortButton" onclick="buttonSort()">Sort!</button>
                 <button type="button" class="btn btn-default" id="quicksortMoreInfo" data-toggle="modal" data-target="#quicksortModal">More info...</button>
+                <button type="button" class="btn btn-default" id="quicksortPseudoCode" data-toggle="popover">Pseudo Code</button>
                 <br>
                 <!-- modal -->
                 <div class="modal fade" id="quicksortModal" tabindex="-1" role="dialog" aria-labelledby="quicksortModalLabel">
@@ -207,6 +208,7 @@
                 <!-- buttons -->
                 <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>                
                 <button type="button" class="btn btn-default" id="insertionsortMoreInfo" data-toggle="modal" data-target="#insertionsortModal">More info...</button>
+                <button type="button" class="btn btn-default" id="insertionsortPseudoCode" data-toggle="popover">Pseudo Code</button>
                 <br>
                 <!-- modal -->
                 <div class="modal fade" id="insertionsortModal" tabindex="-1" role="dialog" aria-labelledby="insertionsortModalLabel">
@@ -278,6 +280,7 @@
                 <!-- buttons -->
                 <button type="button" class="btn btn-default" onclick="buttonSort()">Sort!</button>                
                 <button type="button" class="btn btn-default" id="bubblesortMoreInfo" data-toggle="modal" data-target="#bubblesortModal">More info...</button>
+                <button type="button" class="btn btn-default" id="bubblesortPseudoCode" data-toggle="popover">Pseudo Code</button>
                 <br>
                 <!-- modal -->
                 <div class="modal fade" id="bubblesortModal" tabindex="-1" role="dialog" aria-labelledby="bubblesortModalLabel">
@@ -349,6 +352,7 @@
                 <!-- buttons -->
                 <button type="button" class="btn btn-default" id="selectionsortButton" onclick="buttonSort()">Sort!</button>
                 <button type="button" class="btn btn-default" id="selectionsortMoreInfo" data-toggle="modal" data-target="#selectionsortModal">More info...</button>
+                <button type="button" class="btn btn-default" id="selectionsortPseudoCode" data-toggle="popover">Pseudo Code</button>
                 <br>
                 <!-- modal -->
                 <div class="modal fade" id="selectionsortModal" tabindex="-1" role="dialog" aria-labelledby="selectionsortModalLabel">
@@ -398,6 +402,16 @@
 	$( document ).ready(function() {
         //Abre modal de apresentação
 		$('#initModal').modal('show');
+
+        //seta conteudo dos popovers
+        $('#quicksortPseudoCode').popover({ html: true });
+        $('#insertionsortPseudoCode').popover({ html: true });
+        $('#bubblesortPseudoCode').popover({ html: true });
+        $('#selectionsortPseudoCode').popover({ html: true });
+        $('#quicksortPseudoCode').data('bs.popover').options.content = quicksortPseudoCode();
+        $('#insertionsortPseudoCode').data('bs.popover').options.content = insertionsortPseudoCode();
+        $('#bubblesortPseudoCode').data('bs.popover').options.content = bubblesortPseudoCode();
+        $('#selectionsortPseudoCode').data('bs.popover').options.content = selectionsortPseudoCode();
 	});
 	
     /***************************
@@ -626,7 +640,74 @@
         }
         return array;
     }
-	
+	/***************************
+    **
+    **  Pseudo Code Algorithms
+    **
+    ***************************/
+    function quicksortPseudoCode(){
+        var          pseudocode ='Quicksort(A,p,r):<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;If p < r :<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;q <- Partition(A,p,r)<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;Quicksort(A,p,q)<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;Quicksort(A,q+1,r)<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;End-If<br>'
+        pseudocode = pseudocode +'End-Quicksort<br>'
+        pseudocode = pseudocode +'<br>'
+        pseudocode = pseudocode +'Partition(A,p,r):<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;x = A[r]<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;i = p - 1<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;FOR j = p TO r - 1 DO<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF A[j] <= x THEN<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = i + 1<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exchange A[i] and A[j]<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END-IF<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;END-FOR<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;Exchange A[i + 1] and A[r]<br>'
+        pseudocode = pseudocode +'RETURN i + 1<br>'
+        pseudocode = pseudocode +'End-Partition<br>'
+        return pseudocode;
+    }
+    function insertionsortPseudoCode(){
+        var          pseudocode = 'For I = 2 to N<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;J = I<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;Do while (J > 1) and (A(J) < A(J - 1)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;Temp = A(J)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;A(J) = A(J - 1)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;A(J - 1) = Temp<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;J = J - 1 <br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;End-Do<br>'
+        pseudocode = pseudocode + 'End-For<br>'
+        return pseudocode;
+    }
+    function bubblesortPseudoCode(){
+        var          pseudocode = 'For I = 1 to N - 1<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;For J = 1 to N - 1<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;If (A(J) > A(J + 1)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Temp = A(J)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A(J) = A(J + 1)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A(J + 1) = Temp<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;End-If<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;End-For<br>'
+        pseudocode = pseudocode + 'End-For<br>'
+        return pseudocode;
+    }
+    function selectionsortPseudoCode(){
+        var          pseudocode = 'For I = 1 to N-1 do:<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;Smallsub = I<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;For J = I + 1 to N-1 do:<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;If A(J) < A(Smallsub)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Smallsub = J<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;End-If<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;End-For<br>'
+        pseudocode = pseudocode + 'Temp = A(I)<br>'
+        pseudocode = pseudocode + 'A(I) = A(Smallsub)<br>'
+        pseudocode = pseudocode + 'A(Smallsub) = Temp<br>'
+        pseudocode = pseudocode + 'End-For<br>'
+        return pseudocode;
+    }
+
+
 	/***************************
 	**
 	**  Chart Options
