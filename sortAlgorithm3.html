@@ -4,15 +4,47 @@
       "Sort Algorithms"
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">           <!--Import Google Icon Font-->
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- jQuery -->
     <script src="https://cdn.jsdelivr.net/intro.js/1.1.1/intro.min.js"></script> <!-- Intro JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/intro.js/1.1.1/introjs.min.css"> <!-- Intro JS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> <!-- Bootstrap CSS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script> <!-- Bootstrap JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> <!-- Bootstrap CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->
   </head>
+  
 
-  <body id="centro2">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> <!-- JS Charts -->
+  <body id="centro2" class="scroll-area" data-spy="scroll" data-target="#navBar">
+   <!-- NAVIGATION BAR -->    	
+    <nav class="navbar navbar-default navbar-fixed-top" id="navBar">
+        <div class="container-fluid">
+            <!-- TITULO -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Sort Algorithms</a>
+            </div>
+
+            <!-- RESTO -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#section1"   >Entry Data</a></li>
+                <li><a href="#guideStep3" >Generated Data</a></li>
+                <li><a href="#section3"   >Algorithms</a></li>
+              </ul>                       
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" id="aHelpMe" onclick="initHelp()">Help me!</a></li>
+                <li><a href="#" id="aGuideMe" onclick="initGuide()">Guide me!</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid --> 
+    </nav>
+
 <!-- INTRODUCTION MODAL -->
     <div class="modal bs-example-modal-lg" id="initModal" tabindex="-1" role="dialog" aria-labelledby="initModalLabel">
       <div class="modal-dialog" role="document">
@@ -40,34 +72,11 @@
       </div>
     </div>
 
-<!-- NAVIGATION BAR -->    	
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<!-- TITULO -->
-			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			  </button>
-			  <a class="navbar-brand" href="#">Sort Algorithms</a>
-			</div>
-
-			<!-- RESTO -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			  <ul class="nav navbar-nav">
-				<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" id="aHelpMe" onclick="initHelp()">Help me!</a></li>
-                <li><a href="#" id="aGuideMe" onclick="initGuide()">Guide me!</a></li>
-			  </ul>
-			</div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-	</nav>
+       
  
 <div class="container pagination-centered" role="main"> <!-- centra o conteudo -->
     <!-- ENTRADA DO ARRAY -->  
-    <form class="form-inline">
+    <form class="form-inline" id="section1" data-offset="70">
         <div class="form-group" data-intro='Defina o tamanho do array a ser gerado' data-step='1' id="guideStep1">
             <label for="arrayInputSize">Size</label>
             <input type="number" class="form-control" id="arrayInputSize" name="quantity" min="1" max="500" value="10">
@@ -87,6 +96,7 @@
 
 
     <!--    NAV TABS     -->
+    <div id="section3">
         <ul class="nav nav-tabs" role="tablist" id="tabsAlgoritmosOrdenacao" id="tabsAlgorithms">
             <!-- QUICKSORT -->
             <li role="presentation" class="active" name="quicksort"><a href="#quicksort" aria-controls="quicksort" role="tab" data-toggle="tab" >Quick Sort</a></li>
@@ -97,7 +107,7 @@
             <!-- SELECTIONSORT -->
             <li role="presentation" name="selectionsort"><a href="#selectionsort" aria-controls="selectionsort" role="tab" data-toggle="tab">Selection Sort</a></li>
         </ul>
-
+    </div>
     <!--    TAB PANES     -->
          <div class="tab-content">    
             <!-- QUICKSORT -->
@@ -162,7 +172,7 @@
                     <input type="text" class="form-control" id="quicksortElapsedTime" name="elapsed" readonly>
                 </div>
                 <!-- sorted array -->  
-                <div class="form-group" id="quicksortSortedArray" >
+                <div class="form-group" id="quicksortSortedArray" style="display: none">
                     <label for="textResultquicksort">Sorted array:</label>
                     <textarea class="form-control" rows="5" id="textResultquicksort"></textarea>
                 </div>
@@ -234,7 +244,7 @@
                     <input type="text" class="form-control" id="insertionsortElapsedTime" name="elapsed" readonly>
                 </div>
                 <!-- sorted array -->
-                <div class="form-group">
+                <div class="form-group" style="display: none">
                     <label for="textResultinsertionsort">Sorted array:</label>
                     <textarea class="form-control" rows="5" id="textResultinsertionsort"></textarea>
                 </div>
@@ -306,7 +316,7 @@
                     <input type="text" class="form-control" id="bubblesortElapsedTime" name="elapsed" readonly>
                 </div>
                 <!-- sorted array -->
-                <div class="form-group">
+                <div class="form-group" style="display: none">
                     <label for="textResultbubblesort">Sorted array:</label>
                     <textarea class="form-control" rows="5" id="textResultbubblesort"></textarea>
                 </div>
@@ -379,7 +389,7 @@
                     <input type="text" class="form-control" id="selectionsortElapsedTime" name="elapsed" readonly>
                 </div>
                 <!-- sorted array -->  
-                <div class="form-group" id="selectionsortSortedArray" >
+                <div class="form-group" id="selectionsortSortedArray" style="display: none">
                     <label for="textResultselectionsort">Sorted array:</label>
                     <textarea class="form-control" rows="5" id="textResultselectionsort"></textarea>
                 </div>
@@ -400,6 +410,52 @@
 	 **
      ***************************/ 
 	$( document ).ready(function() {
+
+        //Desabilita scroll da página
+       // $('body').css('overflow','hidden');
+
+        //Scrollspy configs
+        var $body = $('body'), 
+            $navtop = $('#navBar'),
+            offset  = $navtop.outerHeight();
+        // fix body padding (in case navbar size is different than the padding)
+        $body.css('padding-top', offset);
+        // Enable scrollSpy with correct offset based on height of navbar
+        $body.scrollspy({target: '#navBar', offset: offset });
+        // function to do the tweaking
+        function fixSpy() {
+            // grab a copy the scrollspy data for the element
+            var data = $body.data('bs.scrollspy');
+            // if there is data, lets fiddle with the offset value
+            if (data) {
+                // get the current height of the navbar
+                offset = $navtop.outerHeight();
+                // adjust the body's padding top to match
+                $body.css('padding-top', offset);
+                // change the data's offset option to match
+                data.options.offset = offset;
+                // now stick it back in the element
+                $body.data('bs.scrollspy', data);
+                // and finally refresh scrollspy
+                $body.scrollspy('refresh');
+            }
+        }
+        // Now monitor the resize events and make the tweaks
+        var resizeTimer;
+        $(window).resize(function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(fixSpy, 200);
+        });
+        
+        $('.navbar li a').click(function(event) {
+            $(".navbar li").removeClass("active");
+            $(this).parent().addClass("active");
+            event.preventDefault();
+            $($(this).attr('href'))[0].scrollIntoView();
+            scrollBy(0, -offset);
+        });
+        
+        
         //Abre modal de apresentação
 		$('#initModal').modal('show');
 
@@ -408,12 +464,20 @@
         $('#insertionsortPseudoCode').popover({ html: true });
         $('#bubblesortPseudoCode').popover({ html: true });
         $('#selectionsortPseudoCode').popover({ html: true });
+     
+        $('#quicksortPseudoCode').data('bs.popover').options.title = 'Quicksort Pseudo Code';
+        $('#insertionsortPseudoCode').data('bs.popover').options.title = 'Insertionsort Pseudo Code';
+        $('#bubblesortPseudoCode').data('bs.popover').options.title = 'Bubblesort Pseudo Code';
+        $('#selectionsortPseudoCode').data('bs.popover').options.title = 'Selectionsort Pseudo Code';
+                
         $('#quicksortPseudoCode').data('bs.popover').options.content = quicksortPseudoCode();
         $('#insertionsortPseudoCode').data('bs.popover').options.content = insertionsortPseudoCode();
         $('#bubblesortPseudoCode').data('bs.popover').options.content = bubblesortPseudoCode();
         $('#selectionsortPseudoCode').data('bs.popover').options.content = selectionsortPseudoCode();
+                
 	});
-	
+    
+
     /***************************
 	**
 	**  HTML Buttons
@@ -646,19 +710,19 @@
     **
     ***************************/
     function quicksortPseudoCode(){
-        var          pseudocode ='Quicksort(A,p,r):<br>'
-        pseudocode = pseudocode +'&nbsp;&nbsp;If p < r :<br>'
+        var          pseudocode ='<b>Quicksort(A,p,r):</b><br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;<b>IF</b> p < r <b>:</b><br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;q <- Partition(A,p,r)<br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;Quicksort(A,p,q)<br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;Quicksort(A,q+1,r)<br>'
-        pseudocode = pseudocode +'&nbsp;&nbsp;End-If<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;END-IF<br>'
         pseudocode = pseudocode +'End-Quicksort<br>'
         pseudocode = pseudocode +'<br>'
-        pseudocode = pseudocode +'Partition(A,p,r):<br>'
+        pseudocode = pseudocode +'<b>Partition(A,p,r):</b><br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;x = A[r]<br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;i = p - 1<br>'
-        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;FOR j = p TO r - 1 DO<br>'
-        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF A[j] <= x THEN<br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;<b>FOR</b> j = p TO r - 1 <b>:</b><br>'
+        pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>IF</b> A[j] <= x <b>:</b><br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = i + 1<br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exchange A[i] and A[j]<br>'
         pseudocode = pseudocode +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END-IF<br>'
@@ -669,41 +733,41 @@
         return pseudocode;
     }
     function insertionsortPseudoCode(){
-        var          pseudocode = 'For I = 2 to N<br>'
+        var          pseudocode = '<b>FOR</b> I = 2 to N<b>:</b><br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;J = I<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;Do while (J > 1) and (A(J) < A(J - 1)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;<b>DO WHILE</b> (J > 1) and (A(J) < A(J - 1)<b>:</b><br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;Temp = A(J)<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;A(J) = A(J - 1)<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;A(J - 1) = Temp<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;J = J - 1 <br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;End-Do<br>'
-        pseudocode = pseudocode + 'End-For<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;END-DO<br>'
+        pseudocode = pseudocode + 'END-FOR<br>'
         return pseudocode;
     }
     function bubblesortPseudoCode(){
-        var          pseudocode = 'For I = 1 to N - 1<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;For J = 1 to N - 1<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;If (A(J) > A(J + 1)<br>'
+        var          pseudocode = '<b>FOR</b> I = 1 to N - 1<b>:</b><br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;<b>FOR</b> J = 1 to N - 1<b>:</b><br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;<b>IF</b> (A(J) > A(J + 1)<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Temp = A(J)<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A(J) = A(J + 1)<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A(J + 1) = Temp<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;End-If<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;End-For<br>'
-        pseudocode = pseudocode + 'End-For<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;END-IF<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;END-FOR<br>'
+        pseudocode = pseudocode + 'END-FOR<br>'
         return pseudocode;
     }
     function selectionsortPseudoCode(){
-        var          pseudocode = 'For I = 1 to N-1 do:<br>'
+        var          pseudocode = '<b>FOR</b> I = 1 to N-1 do<b>:</b><br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;Smallsub = I<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;For J = I + 1 to N-1 do:<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;If A(J) < A(Smallsub)<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;<b>IF</b> A(J) < A(Smallsub)<br>'
         pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Smallsub = J<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;End-If<br>'
-        pseudocode = pseudocode + '&nbsp;&nbsp;End-For<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;&nbsp;&nbsp;END-IF<br>'
+        pseudocode = pseudocode + '&nbsp;&nbsp;END-FORr<br>'
         pseudocode = pseudocode + 'Temp = A(I)<br>'
         pseudocode = pseudocode + 'A(I) = A(Smallsub)<br>'
         pseudocode = pseudocode + 'A(Smallsub) = Temp<br>'
-        pseudocode = pseudocode + 'End-For<br>'
+        pseudocode = pseudocode + 'END-FOR<br>'
         return pseudocode;
     }
 
@@ -774,11 +838,6 @@
                 position: 'bottom'
               },
               {
-                element: '#quicksortSortedArray',
-                intro: 'Array ordenado',
-                position: 'bottom'
-              },
-              {
                 element: '#quicksortChartButton',
                 intro: 'Pressione o botão para mostrar o gráfico',
                 position: 'bottom'
@@ -831,11 +890,6 @@
               {
                 element: '#quicksortElapsedTime',
                 intro: 'Tempo decorrido durante a ordenação',
-                position: 'bottom'
-              },
-              {
-                element: '#quicksortSortedArray',
-                intro: 'Array ordenado',
                 position: 'bottom'
               },
               {
